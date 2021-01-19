@@ -1,0 +1,22 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: description
+Transform:
+  - AWS::Serverless-2016-10-31
+Resources:
+  SendToDropbox:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: src/handlers/index.handler
+      Runtime: nodejs12.x
+      MemorySize: 128
+      Timeout: 100
+      Description: A Lambda function that send text to dropbox.
+      Policies:
+        - AWSLambdaBasicExecutionRole
+      Environment:
+        Variables:
+          SAMPLE_VALUE: 
+            Ref: SampleValue
+Parameters:
+  SampleValue:
+    Type: String

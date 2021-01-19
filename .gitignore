@@ -1,0 +1,8 @@
+.vs
+.aws-sam/
+node_modules/
+env.json
+testenv.json
+event.json
+.env
+*.toml
