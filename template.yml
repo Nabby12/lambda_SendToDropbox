@@ -15,8 +15,16 @@ Resources:
         - AWSLambdaBasicExecutionRole
       Environment:
         Variables:
-          SAMPLE_VALUE: 
-            Ref: SampleValue
+          LINE_CHANNEL_SECRET: 
+            Ref: LineChannelSecret
+          LINE_HEADER: 
+            Ref: LineHeader
+          LINE_CHANNEL_ACCESS_TOKEN: 
+            Ref: LineChannelAccessToken
 Parameters:
-  SampleValue:
+  LineChannelSecret:
+    Type: String
+  LineHeader:
+    Type: String
+  LineChannelAccessToken:
     Type: String

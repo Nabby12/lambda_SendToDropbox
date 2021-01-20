@@ -29,6 +29,15 @@ async function authorize(event) {
     return result;
 }
 
+function shapingText(event) {
+    const eventBody = JSON.parse(event.body);
+    const sendText = eventBody.events[0].message.text;
+
+    const result = '---' + '\n' + sendText + '\n' + '---'
+
+    return result;
+}
+
 async function reply(event, replyMessage) {
     const eventBody = JSON.parse(event.body);
     const message = {
@@ -54,5 +63,6 @@ async function reply(event, replyMessage) {
 
 module.exports = {
     authorize,
+    shapingText,
     reply
 };
