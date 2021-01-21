@@ -21,10 +21,18 @@ Resources:
             Ref: LineHeader
           LINE_CHANNEL_ACCESS_TOKEN: 
             Ref: LineChannelAccessToken
+          DROPBOX_ACCESS_TOKEN: 
+            Ref: DropboxAccessToken
+          DROPBOX_DIRECTORY: 
+            Ref: DropboxDirectory
 Parameters:
   LineChannelSecret:
     Type: String
   LineHeader:
     Type: String
   LineChannelAccessToken:
+    Type: String
+  DropboxAccessToken:
+    Type: String
+  DropboxDirectory:
     Type: String
