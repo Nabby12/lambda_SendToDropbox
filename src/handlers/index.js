@@ -18,17 +18,11 @@ exports.handler = async (event) => {
     const sendText = lineModule.shapingText(event);
     const currentTimeString = getCurrentTimeString();
 
-    const sendText = 'sendText';
-
     const dropboxResult = await dropboxModule.uploadText(sendText, currentTimeString)
-    if (!dropboxResult.isOk){
-        result = {'status': dropboxResult.content};
-        replyStatus = await lineModule.reply(event, result.status);
-        result.isReply = replyStatus.isReply;
-        return result;
-    };
 
-    // レスポンスをlineに返信
+    replyStatus = await lineModule.reply(event, dropboxResult.content);
+    result.isReply = replyStatus.isReply;
+    return result;
 }
 
 function getCurrentTimeString() {
