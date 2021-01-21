@@ -1,56 +1,42 @@
 'use strict'
 
-const fs = require('fs');
-const { send } = require('process');
-const request = require('request');
-const requestPromise = require('request-promise');
+const axios = require('axios');
 
 const DROPBOX_ACCESS_TOKEN = process.env['DROPBOX_ACCESS_TOKEN'];
 const DROPBOX_DIRECTORY = process.env['DROPBOX_DIRECTORY'];
 
 async function uploadText(sendText, currentTimeString) {
     const args = JSON.stringify({
-        'path': DROPBOX_DIRECTORY + currentTimeString + '.md',
-        'mode': 'add',
-        'autorename': true,
-        'mute': true,
+        path: `${ DROPBOX_DIRECTORY + currentTimeString }.md`,
+        mode: 'add',
+        autorename: true,
+        mute: true,
+        strict_conflict: false,
     });
 
-    const tmpFilePath = '/tmp/tmp.md';
-    const tmpFile = fs.writeFileSync(tmpFilePath, sendText, 'binary');
-
-    const options = {
-        method: 'POST',
+    const result = await axios({
+        method: 'post',
         url: 'https://content.dropboxapi.com/2/files/upload',
-        data: tmpFile,
-        encoding: 'binary',
+        data: sendText,
         headers: {
-            'Authorization': 'Bearer ' + DROPBOX_ACCESS_TOKEN,
+            'Authorization': `Bearer ${ DROPBOX_ACCESS_TOKEN }`,
             'Content-Type': 'application/octet-stream',
-            'Dropbox-API-Arg': args,
+            'Dropbox-API-Arg': args
         }
-    }
-    
-    let result = await requestPromise.post(options)
-    .then(response => {
-        console.log(JSON.stringify(response));
-
-        return {
-            'isOk': true,
-            'content': 'upload succeeded.'
+    }).then(() => {
+        return { 
+            isOk: true,
+            content: 'upload succeeded.'
         };
-    })
-    .catch(err => {
-        console.log(err);
-        return {
-            'isOk': false,
-            'content': 'upload failed.'
+    }).catch(err => {
+        //   console.log(err)
+        return { 
+            isOk: false,
+            content: 'upload failed.'
         };
     });
 
-    fs.unlinkSync(tmpFilePath);
-
-    return result;
+     return result;
 }
 
 module.exports = {

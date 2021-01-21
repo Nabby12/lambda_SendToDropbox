@@ -34,5 +34,5 @@ Parameters:
     Type: String
   DropboxAccessToken:
     Type: String
-  DROPBOX_DIRECTORY:
+  DropboxDirectory:
     Type: String
