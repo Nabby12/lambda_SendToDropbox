@@ -1,7 +1,6 @@
 'use strict'
 
 const LINE_CHANNEL_SECRET = process.env['LINE_CHANNEL_SECRET'];
-const LINE_HEADER = process.env['LINE_HEADER'];
 const LINE_CHANNEL_ACCESS_TOKEN = process.env['LINE_CHANNEL_ACCESS_TOKEN'];
 
 const LINE = require('@line/bot-sdk');
@@ -18,7 +17,7 @@ async function authorize(event) {
         // console.log(err);
     };
 
-    const headerSignature = event.headers[LINE_HEADER];
+    const headerSignature = event.headers['x-line-signature'];
     let result;
     if (signature === headerSignature) {
         result = { 'isAuthorize': true };

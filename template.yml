@@ -17,8 +17,6 @@ Resources:
         Variables:
           LINE_CHANNEL_SECRET: 
             Ref: LineChannelSecret
-          LINE_HEADER: 
-            Ref: LineHeader
           LINE_CHANNEL_ACCESS_TOKEN: 
             Ref: LineChannelAccessToken
           DROPBOX_ACCESS_TOKEN: 
@@ -27,8 +25,6 @@ Resources:
             Ref: DropboxDirectory
 Parameters:
   LineChannelSecret:
-    Type: String
-  LineHeader:
     Type: String
   LineChannelAccessToken:
     Type: String

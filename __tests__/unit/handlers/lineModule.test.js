@@ -17,7 +17,7 @@ describe('Test for lineModule', () => {
 
     const dummyEvent = {
         "headers": {
-            "target-header": "dummySignature"
+            "x-line-signature": "dummySignature"
         },
         "body": '{"events": [{"replyToken": "dummyToken", "message": {"text": "dummyText"}}]}'
     };
@@ -25,7 +25,6 @@ describe('Test for lineModule', () => {
     beforeEach(() => {
         sandbox = createSandbox();
         sandbox.stub(process, 'env').value({
-            LINE_HEADER: 'target-header',
             LINE_CHANNEL_SECRET: 'dummyToken',
         });
 
