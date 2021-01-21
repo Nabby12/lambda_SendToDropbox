@@ -17,7 +17,7 @@ async function authorize(event) {
         // console.log(err);
     };
 
-    const headerSignature = event.headers['x-line-signature'];
+    const headerSignature = event.headers['X-Line-Signature'];
     let result;
     if (signature === headerSignature) {
         result = { 'isAuthorize': true };

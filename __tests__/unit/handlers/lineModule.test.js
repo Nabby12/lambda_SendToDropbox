@@ -17,7 +17,7 @@ describe('Test for lineModule', () => {
 
     const dummyEvent = {
         "headers": {
-            "x-line-signature": "dummySignature"
+            "X-Line-Signature": "dummySignature"
         },
         "body": '{"events": [{"replyToken": "dummyToken", "message": {"text": "dummyText"}}]}'
     };
