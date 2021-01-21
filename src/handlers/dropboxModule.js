@@ -26,13 +26,13 @@ async function uploadText(sendText, currentTimeString) {
     }).then(() => {
         return { 
             isOk: true,
-            content: 'upload succeeded.'
+            content: 'send to dropbox succeeded.'
         };
     }).catch(err => {
         //   console.log(err)
         return { 
             isOk: false,
-            content: 'upload failed.'
+            content: 'send to dropbox failed.'
         };
     });
 
