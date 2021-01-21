@@ -16,18 +16,22 @@ exports.handler = async (event) => {
     };
 
     const sendText = lineModule.shapingText(event);
-    const todayString = getTodayString();
+    const currentTimeString = getCurrentTimeString();
 
-    // dropboxからinboxファイル内容取得（request-promise使おうかな）
+    const sendText = 'sendText';
 
-    // dropboxから取得した内容 + 格納した変数を合わせる
-    
-    // dropboxのinboxファイルにテキストアップロード（上書き=overwrite）
+    const dropboxResult = await dropboxModule.uploadText(sendText, currentTimeString)
+    if (!dropboxResult.isOk){
+        result = {'status': dropboxResult.content};
+        replyStatus = await lineModule.reply(event, result.status);
+        result.isReply = replyStatus.isReply;
+        return result;
+    };
 
     // レスポンスをlineに返信
 }
 
-function getTodayString() {
+function getCurrentTimeString() {
     const dayOfTheWeekArray = [
         'Sun',
         'Mon',
@@ -36,15 +40,19 @@ function getTodayString() {
         'Thu',
         'Fri',
         'Sat',
-    ]
+    ];
 
-    const today = new Date();
-    const year = today.getFullYear().toString();
-    const month = ('00' + (today.getMonth() + 1)).slice(-2).toString();
-    const date = ('00' + today.getDate()).slice(-2).toString()
-    const dayOfTheWeek = dayOfTheWeekArray[today.getDay()];
+    const currentDate = new Date(Date.now() + (new Date().getTimezoneOffset() + (9 * 60)) * 60 * 1000);
 
-    const result = year + month + date + '_' + dayOfTheWeek;
+    const year = currentDate.getFullYear().toString();
+    const month = ('00' + (currentDate.getMonth() + 1)).slice(-2).toString();
+    const date = ('00' + currentDate.getDate()).slice(-2).toString();
+    const dayOfTheWeek = dayOfTheWeekArray[currentDate.getDay()];
+    const time = ('00' + currentDate.getHours()).slice(-2).toString() + 
+                 ('00' + currentDate.getMinutes()).slice(-2).toString() + 
+                 ('00' + currentDate.getSeconds()).slice(-2).toString();
+
+    const result = year + month + date + '_' + dayOfTheWeek + '_' + time;
 
     return result;
 }
