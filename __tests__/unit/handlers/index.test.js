@@ -5,7 +5,7 @@ const chai = require('chai');
 chai.use(require('chai-as-promised'));
 const assert = chai.assert;
 const expect = chai.expect;
-const { createSandbox, FakeXMLHttpRequest } = require('sinon');
+const { createSandbox } = require('sinon');
 const proxyquire = require('proxyquire')
 
 const dropboxModule = require('../../../src/handlers/dropboxModule');
