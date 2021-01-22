@@ -26,7 +26,7 @@ exports.handler = async (event) => {
         return result;
     };
 
-    replyStatus = await lineModule.reply(event, 'update text succeeded');
+    replyStatus = await lineModule.reply(event, 'update text succeeded.');
     result.isReply = replyStatus.isReply;
     return result;
 }
