@@ -8,7 +8,6 @@ const expect = chai.expect;
 const { createSandbox, FakeXMLHttpRequest } = require('sinon');
 const proxyquire = require('proxyquire')
 
-const index = require('../../../src/handlers/index.js');
 const dropboxModule = require('../../../src/handlers/dropboxModule');
 
 describe('Test for index', () => {
