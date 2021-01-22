@@ -15,7 +15,7 @@ async function uploadText(sendText, currentTimeString) {
     });
 
     const result = await axios({
-        method: 'post',
+        method: 'POST',
         url: 'https://content.dropboxapi.com/2/files/upload',
         data: sendText,
         headers: {
@@ -24,16 +24,10 @@ async function uploadText(sendText, currentTimeString) {
             'Dropbox-API-Arg': args
         }
     }).then(() => {
-        return { 
-            isOk: true,
-            content: 'send to dropbox succeeded.'
-        };
+        return { isUpdate: true };
     }).catch(err => {
         //   console.log(err)
-        return { 
-            isOk: false,
-            content: 'send to dropbox failed.'
-        };
+        return { isUpdate: false };
     });
 
      return result;
