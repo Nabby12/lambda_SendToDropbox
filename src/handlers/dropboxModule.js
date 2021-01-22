@@ -15,7 +15,7 @@ async function uploadText(sendText, currentTimeString) {
     });
 
     const result = await axios({
-        method: 'post',
+        method: 'POST',
         url: 'https://content.dropboxapi.com/2/files/upload',
         data: sendText,
         headers: {
