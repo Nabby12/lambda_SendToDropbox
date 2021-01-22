@@ -19,8 +19,14 @@ exports.handler = async (event) => {
     const currentTimeString = getCurrentTimeString();
 
     const dropboxResult = await dropboxModule.uploadText(sendText, currentTimeString)
+    if (!dropboxResult.isUpdate) {
+        result = {'status': 'send to dropbox failed.'};
+        replyStatus = await lineModule.reply(event, result.status);
+        result.isReply = replyStatus.isReply;
+        return result;
+    };
 
-    replyStatus = await lineModule.reply(event, dropboxResult.content);
+    replyStatus = await lineModule.reply(event, 'update text succeeded');
     result.isReply = replyStatus.isReply;
     return result;
 }
