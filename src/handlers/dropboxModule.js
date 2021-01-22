@@ -24,16 +24,10 @@ async function uploadText(sendText, currentTimeString) {
             'Dropbox-API-Arg': args
         }
     }).then(() => {
-        return { 
-            isOk: true,
-            content: 'send to dropbox succeeded.'
-        };
+        return { isUpdate: true };
     }).catch(err => {
         //   console.log(err)
-        return { 
-            isOk: false,
-            content: 'send to dropbox failed.'
-        };
+        return { isUpdate: false };
     });
 
      return result;
