@@ -15,7 +15,9 @@ exports.handler = async (event) => {
         return result;
     };
 
-    const sendText = shapingText(event);
+    const eventBody = JSON.parse(event.body);
+    const sendText = eventBody.events[0].message.text;
+
     const currentTimeString = getCurrentTimeString();
 
     const dropboxResult = await dropboxModule.uploadText(sendText, currentTimeString)
@@ -30,15 +32,6 @@ exports.handler = async (event) => {
     result = { 'status': resultStatus };
     replyStatus = await lineModule.reply(event, resultStatus);
     result.isReply = replyStatus.isReply;
-    return result;
-}
-
-function shapingText(event) {
-    const eventBody = JSON.parse(event.body);
-    const sendText = eventBody.events[0].message.text;
-
-    const result = '---' + '\n' + sendText + '\n' + '---'
-
     return result;
 }
 
